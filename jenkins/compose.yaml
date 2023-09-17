@@ -13,8 +13,8 @@ services:
       - 50000:50000
     container_name: jenkins
     volumes:
-      - ./jenkins_home:/var/jenkins_home:rw
-      - /var/run/docker.sock:/var/run/docker.sock
+      - ./jenkins_home:/var/jenkins_home:rw,z
+      - /var/run/docker.sock:/var/run/docker.sock:z
   
   agent:
     image: ubuntu:latest
@@ -29,8 +29,8 @@ services:
           - agent-docker
     container_name: agent
     volumes:
-      - ./jenkins/jenkins_agent:/home/jenkins:rw
-      - /var/run/docker.sock:/var/run/docker.sock
+      - ./jenkins_agent:/home/jenkins:rw,z
+      - /var/run/docker.sock:/var/run/docker.sock:z
 
 networks:
   jenkins:
