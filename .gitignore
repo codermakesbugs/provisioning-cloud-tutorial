@@ -1,0 +1,7 @@
+jenkins/jenkins_home/*
+jenkins/jenkins_agent/*
+
+.DS_Store
+
+.idea/
+provision-cloud.iml
