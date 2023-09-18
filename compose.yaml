@@ -18,9 +18,8 @@ services:
       - ./jenkins/ssh/id_rsa:/var/jenkins_home/.ssh/id_rsa
   
   agent:
-    image: ubuntu:latest
+    image: agent
     privileged: true
-    user: root
     tty: true
     cap_add:
       - NET_ADMIN

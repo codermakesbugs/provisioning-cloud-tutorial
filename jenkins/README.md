@@ -20,39 +20,11 @@ ssh-keygen -t rsa -b 4096 -f $(pwd)/ssh
 ```
 
 ## Setup Agent container
-
-### Access to agent container
+- Build image agent
 ```
-docker exec -it agent bash
-```
-
-### Update package and install packages
-```
-apt update
-apt install ufw docker.io openssh-server net-tools
+docker build -t agent .
 ```
 
-### Open port 22 to use SSH
-```
-ufw allow ssh
-ufw enable
-```
-
-### Checking sshd status
-```
-netstat -plant | grep :22
-```
-
-### If sshd is downed let restart sshd
-```
-/usr/sbin/sshd start
-```
-
-## docker.sock
-Checking user and group after mount it. If its group id does't the same with user docker in the container. Change the group id to the same.
-```
-groupmod -g {new-id} docker
-```
 
 # Setup Jenkin agent node.
 
