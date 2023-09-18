@@ -1,5 +1,6 @@
 jenkins/jenkins_home/*
 jenkins/jenkins_agent/*
+jenkins/ssh/*
 
 .DS_Store
 
