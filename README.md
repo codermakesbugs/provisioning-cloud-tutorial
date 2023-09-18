@@ -1,6 +1,11 @@
 # Running infrastructure
 
 
-## Access subfolder and Follow README.md
+## Setup Jenkins
+
+Follow this doc [Jekins Guilde](jenkins/README.md)
 
 ## Using docker-compose to run infrastructure
+```
+docker-compose up -d
+```
