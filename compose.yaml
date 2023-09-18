@@ -5,7 +5,7 @@ services:
     privileged: true
     user: jenkins
     networks:
-      jenkins:
+      infrastructure:
         aliases: 
           - jenkins-docker
     ports:
@@ -13,8 +13,9 @@ services:
       - 50000:50000
     container_name: jenkins
     volumes:
-      - ./jenkins_home:/var/jenkins_home:rw,z
+      - ./jenkins/jenkins_home:/var/jenkins_home:rw,z
       - /var/run/docker.sock:/var/run/docker.sock:z
+      - ./jenkins/ssh/id_rsa:/var/jenkins_home/.ssh/id_rsa
   
   agent:
     image: ubuntu:latest
@@ -24,16 +25,17 @@ services:
     cap_add:
       - NET_ADMIN
     networks:
-      jenkins:
+      infrastructure:
         aliases: 
           - agent-docker
     container_name: agent
     volumes:
-      - ./jenkins_agent:/home/jenkins:rw,z
+      - ./jenkins/jenkins_agent:/home/jenkins:rw,z
       - /var/run/docker.sock:/var/run/docker.sock:z
+      - ./jenkins/ssh/id_rsa:/home/jenkins/.ssh/authorized_keys
 
 networks:
-  jenkins:
+  infrastructure:
     driver: bridge
     ipam:
       driver: default
