@@ -1,0 +1,37 @@
+pipeline {
+  agent {
+    label 'agent-docker'
+  }
+
+  options {
+    buildDiscarder(logRotator(daysToKeepStr: "14", numToKeepStr: "5"))
+    disableConcurrentBuilds(abortPrevious: true)
+    timeout(time: 30, unit: 'MINUTES')
+  }
+
+  stages {
+    stage("Build environment information") {
+      steps {
+        sh "whoami"
+        sh "printenv"
+      }
+    }
+
+    stage("Build") {
+      dir("jfrog") {
+        sh "mvn clean install"
+      }
+    }
+
+    stage("Upload to Artifactory") {
+        agent {
+            image 'releases-docker.jfrog.io/jfrog/jfrog-cli-v2:2.2.0'
+            reuseNode true
+        }
+        steps{
+            sh 'echo "TODO: Next commit"'
+        }
+    }
+  }
+  
+}
