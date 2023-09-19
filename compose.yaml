@@ -1,4 +1,5 @@
 version: '3.9'
+
 services:
   jenkins:
     image: jenkins/jenkins:2.414.1-lts-jdk17
@@ -32,6 +33,19 @@ services:
       - ./jenkins/jenkins_agent:/home/jenkins:rw,z
       - /var/run/docker.sock:/var/run/docker.sock:z
       - ./jenkins/ssh/id_rsa.pub:/home/jenkins/.ssh/authorized_keys
+
+  jfrog:
+    image: releases-docker.jfrog.io/jfrog/artifactory-oss:latest
+    networks:
+      infrastructure:
+        aliases: 
+          - jfrog-docker
+    ports:
+      - 9081:8081
+      - 9082:8082
+    container_name: jfrog
+    volumes:
+      - ./jfrog/jfrog-home:/var/opt/jfrog:rw,z
 
 networks:
   infrastructure:
