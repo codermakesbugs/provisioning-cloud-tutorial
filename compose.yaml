@@ -45,10 +45,11 @@ services:
       - 9082:8082
     container_name: jfrog
     volumes:
-      - ./jfrog/jfrog-home:/var/opt/jfrog:rw,z
+      - ./jfrog/jfrog-home:/var/opt/jfrog/artifactory/:rw,z
 
 networks:
   infrastructure:
+    name: infrastructure
     driver: bridge
     ipam:
       driver: default
