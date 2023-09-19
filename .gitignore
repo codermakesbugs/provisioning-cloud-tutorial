@@ -2,6 +2,8 @@ jenkins/jenkins_home/*
 jenkins/jenkins_agent/*
 jenkins/ssh/*
 
+jfrog/jfrog-home/
+
 .DS_Store
 
 .idea/
