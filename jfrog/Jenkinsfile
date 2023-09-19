@@ -10,6 +10,7 @@ pipeline {
   }
 
   stages {
+
     stage("Build environment information") {
       steps {
         sh "whoami"
@@ -18,20 +19,25 @@ pipeline {
     }
 
     stage("Build") {
-      dir("jfrog") {
-        sh "mvn clean install"
-      }
+        steps {
+            dir("jfrog") {
+                sh "mvn clean install"
+            }
+        }
     }
 
     stage("Upload to Artifactory") {
         agent {
-            image 'releases-docker.jfrog.io/jfrog/jfrog-cli-v2:2.2.0'
-            reuseNode true
+            docker {
+                image 'releases-docker.jfrog.io/jfrog/jfrog-cli-v2:2.2.0'
+                reuseNode true
+            }
         }
         steps{
             sh 'echo "TODO: Next commit"'
         }
     }
+    
   }
   
 }
