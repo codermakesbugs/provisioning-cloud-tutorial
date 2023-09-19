@@ -3,6 +3,10 @@ pipeline {
     label 'agent-docker'
   }
 
+  tools {
+    maven '3.9.4'
+  }
+
   options {
     buildDiscarder(logRotator(daysToKeepStr: "14", numToKeepStr: "5"))
     disableConcurrentBuilds(abortPrevious: true)
@@ -37,7 +41,7 @@ pipeline {
             sh 'echo "TODO: Next commit"'
         }
     }
-    
+
   }
   
 }
