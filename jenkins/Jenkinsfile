@@ -17,7 +17,7 @@ pipeline {
       }
     }
     
-    stage("Hello Worl") {
+    stage("Hello World") {
       steps {
         helloWorld()
       }
