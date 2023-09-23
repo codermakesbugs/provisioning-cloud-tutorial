@@ -14,19 +14,13 @@ pipeline {
       steps {
         sh "whoami"
         sh "printenv"
-        sh "pwd"
-        sh "uname -a"
       }
     }
-
-    stage('Docker step') {
-      agent {
-        docker { image 'node:18.17.1-alpine3.18' }
-      }
+    
+    stage("Hello Worl") {
       steps {
-          sh 'node --version'
+        helloWorld()
       }
     }
   }
-  
 }
