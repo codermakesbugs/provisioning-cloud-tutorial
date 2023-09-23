@@ -22,6 +22,7 @@ ssh-keygen -t rsa -b 4096 -f $(pwd)/ssh
 ## Setup Agent container
 - Build image agent
 ```
+cd agent-image
 docker build -t agent .
 ```
 
