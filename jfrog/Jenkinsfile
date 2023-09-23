@@ -27,7 +27,7 @@ pipeline {
       }
     }
 
-    stage("Build") {
+    stage("Build Java Module") {
         steps {
             dir("jfrog/demo") {
                 sh "mvn clean install"
