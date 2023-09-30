@@ -36,6 +36,9 @@ apt install \
     openssh-server \
     openjdk-17-jdk openjdk-17-jre
 
+curl -fL https://install-cli.jfrog.io | sh
+chmod +x /usr/local/bin/jf
+
 wget -qO - https://releases.jfrog.io/artifactory/jfrog-gpg-public/jfrog\_public\_gpg.key | sudo apt-key add -
 echo "deb https://releases.jfrog.io/artifactory/jfrog-debs xenial contrib" | sudo tee -a /etc/apt/sources.list;
 apt update;
