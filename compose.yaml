@@ -10,6 +10,7 @@ services:
         aliases:
           - jenkins-docker
     ports:
+      - 88:8080 
       - 50000:50000
     container_name: jenkins
     environment:
@@ -42,7 +43,7 @@ services:
         aliases:
           - jfrog-docker
     ports:
-      - 9082:8082
+      - 82:8082
     container_name: jfrog
     volumes:
       - ./jfrog/jfrog-home:/var/opt/jfrog/artifactory/:rw,z
