@@ -3,6 +3,7 @@ jenkins/jenkins_agent/*
 jenkins/ssh/*
 
 jfrog/jfrog-home/
+nginx/template/
 
 .DS_Store
 
