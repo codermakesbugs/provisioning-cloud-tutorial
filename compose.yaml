@@ -47,19 +47,19 @@ services:
     volumes:
       - ./jfrog/jfrog-home:/var/opt/jfrog/artifactory/:rw,z
 
-web:
-  image: nginx
-  volumes:
-   - ./nginx/templates:/etc/nginx/templates
-  ports:
-   - "80:80"
-  networks:
-      infrastructure:
-        aliases: 
-          - nginx-docker
-  environment:
-   - NGINX_HOST=provision-cloud.com
-   - NGINX_PORT=80
+  gateway:
+    image: nginx
+    volumes:
+    - ./nginx/templates:/etc/nginx/templates
+    ports:
+    - "80:80"
+    networks:
+        infrastructure:
+          aliases: 
+            - nginx-docker
+    environment:
+    - NGINX_HOST=provision-cloud.com
+    - NGINX_PORT=80
 
 networks:
   infrastructure:
