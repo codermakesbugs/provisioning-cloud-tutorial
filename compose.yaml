@@ -7,17 +7,18 @@ services:
     user: jenkins
     networks:
       infrastructure:
-        aliases: 
+        aliases:
           - jenkins-docker
     ports:
-      - 8088:8080
       - 50000:50000
     container_name: jenkins
+    environment:
+      - JENKINS_OPTS=--prefix=/jenkins
     volumes:
       - ./jenkins/jenkins_home:/var/jenkins_home:rw,z
       - /var/run/docker.sock:/var/run/docker.sock:z
       - ./jenkins/ssh/id_rsa:/var/jenkins_home/.ssh/id_rsa
-  
+
   agent:
     image: agent
     privileged: true
@@ -26,7 +27,7 @@ services:
       - NET_ADMIN
     networks:
       infrastructure:
-        aliases: 
+        aliases:
           - agent-docker
     container_name: agent
     volumes:
@@ -38,10 +39,9 @@ services:
     image: releases-docker.jfrog.io/jfrog/artifactory-oss:latest
     networks:
       infrastructure:
-        aliases: 
+        aliases:
           - jfrog-docker
     ports:
-      - 9081:8081
       - 9082:8082
     container_name: jfrog
     volumes:
@@ -50,13 +50,13 @@ services:
   gateway:
     image: nginx
     volumes:
-      - ./nginx/templates:/etc/nginx/templates:rw,z
       - ./nginx/custom.conf:/etc/nginx/conf.d/default.conf:rw,z
     ports:
       - "80:80"
+    container_name: gateway
     networks:
         infrastructure:
-          aliases: 
+          aliases:
             - nginx-docker
 
 networks:
