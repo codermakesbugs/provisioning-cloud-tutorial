@@ -9,8 +9,6 @@ services:
       infrastructure:
         aliases:
           - jenkins-docker
-    ports:
-      - 50000:50000
     container_name: jenkins
     environment:
       - JENKINS_OPTS=--prefix=/jenkins
