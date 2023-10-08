@@ -2,23 +2,19 @@ version: '3.9'
 
 services:
   jenkins:
-    image: jenkins/jenkins:2.414.1-lts-jdk17
+    image: jenkins/jenkins:latest-jdk17
     privileged: true
     user: jenkins
     networks:
       infrastructure:
         aliases:
           - jenkins-docker
-    ports:
-      - 88:8080 
-      - 50000:50000
     container_name: jenkins
     environment:
       - JENKINS_OPTS=--prefix=/jenkins
     volumes:
       - ./jenkins/jenkins_home:/var/jenkins_home:rw,z
-      - /var/run/docker.sock:/var/run/docker.sock:z
-      - ./jenkins/ssh/id_rsa:/var/jenkins_home/.ssh/id_rsa
+      - ./jenkins/ssh/id_rsa:/var/jenkins_home/.ssh/id_ed25519
 
   agent:
     image: agent
@@ -26,6 +22,7 @@ services:
     tty: true
     cap_add:
       - NET_ADMIN
+    platform: linux/amd64
     networks:
       infrastructure:
         aliases:
@@ -42,8 +39,6 @@ services:
       infrastructure:
         aliases:
           - jfrog-docker
-    ports:
-      - 82:8082
     container_name: jfrog
     volumes:
       - ./jfrog/jfrog-home:/var/opt/jfrog/artifactory/:rw,z

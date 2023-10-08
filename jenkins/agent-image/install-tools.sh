@@ -39,6 +39,7 @@ apt install \
 curl -fL https://install-cli.jfrog.io | sh
 chmod +x /usr/local/bin/jf
 
+# Setup jfrog-cli-v2-jf for arm64 architecture. If use linux/amd64 can install without it.
 wget -qO - https://releases.jfrog.io/artifactory/jfrog-gpg-public/jfrog\_public\_gpg.key | sudo apt-key add -
 echo "deb https://releases.jfrog.io/artifactory/jfrog-debs xenial contrib" | sudo tee -a /etc/apt/sources.list;
 apt update;
