@@ -1,0 +1,7 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- jenkins/service.yaml
+- jenkins/volume.yaml
+- jenkins/deployment.yaml
+- ingress/gateway.yaml
