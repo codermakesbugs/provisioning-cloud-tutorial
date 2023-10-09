@@ -1,13 +1,36 @@
 # Nginx
 
-## Local mechine
-Connect machine to tailscale VPN.
-Add your tailscale ip device to this file file `/etc/hosts` with dns name `homelab`
-Example:
+## Cloud machine
+1. Add this [file](cloud.conf) to `/etc/nginx/conf.d/`
+
+2. Connect machine to Tailscale VPN.
+Add your Tailscale IP device to this file file `/etc/hosts` with dns name `homelab`
+
+- Example: `homelab    100.100.100.100`
+
+3. Config TLS
+- Install tool
 ```
-homelab    100.100.100.100
+apt-get update
+sudo apt-get install certbot
+apt-get install python3-certbot-nginx
 ```
 
-## Cloud mechine
-Connect machine to tailscale VPN.
-Add the [file](cloud.conf) to `/etc/nginx/conf.d/`
+- Run the following command to generate certificates with the NGINX plug‑in:
+
+```
+sudo certbot --nginx -d {{ your DNS }}
+```
+
+4. Automatically Renew Let’s Encrypt Certificates.
+
+- Open the crontab file.
+```
+crontab -e
+```
+
+- Add the certbot command to run daily. In this example, we run the command every day at noon. The command checks to see if the certificate on the server will expire within the next 30 days, and renews it if so. The --quiet directive tells certbot not to generate output.
+```
+0 12 * * * /usr/bin/certbot renew --quiet
+
+```
