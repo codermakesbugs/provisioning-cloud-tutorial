@@ -1,9 +1,9 @@
-jenkins/jenkins_home/*
-jenkins/jenkins_agent/*
-jenkins/ssh/*
+docker/jenkins/jenkins_home/
+docker/jenkins/jenkins_agent/
+docker/jenkins/ssh/
 
-jfrog/jfrog-home/
-nginx/template/
+docker/jfrog/jfrog-home/
+docker/nginx/template/
 
 .DS_Store
 
