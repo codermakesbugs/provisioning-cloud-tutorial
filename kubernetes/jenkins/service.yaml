@@ -3,7 +3,6 @@ kind: Service
 metadata:
   name: jenkins-service
 spec:
-  type: NodePort
   ports:
     - port: 8080
       targetPort: 8080
@@ -17,7 +16,6 @@ kind: Service
 metadata:
   name: jenkins-jnlp
 spec:
-  type: ClusterIP
   ports:
     - port: 50000
       targetPort: 50000

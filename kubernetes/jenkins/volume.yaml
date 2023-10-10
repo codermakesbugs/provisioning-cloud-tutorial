@@ -15,7 +15,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   local:
-    path: /mnt
+    path: /mnt/jenkins_home
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -23,7 +23,7 @@ spec:
         - key: kubernetes.io/hostname
           operator: In
           values:
-          - docker-desktop
+          - minikube
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
