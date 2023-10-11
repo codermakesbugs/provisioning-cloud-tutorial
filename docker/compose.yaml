@@ -7,11 +7,7 @@ services:
     user: jenkins
     networks:
       infrastructure:
-        aliases:
-          - jenkins-docker
     container_name: jenkins
-    environment:
-      - JENKINS_OPTS=--prefix=/jenkins
     volumes:
       - ./jenkins/jenkins_home:/var/jenkins_home:rw,z
       - ./jenkins/ssh/id_rsa:/var/jenkins_home/.ssh/id_ed25519
@@ -33,16 +29,11 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:z
       - ./jenkins/ssh/id_rsa.pub:/home/jenkins/.ssh/authorized_keys
 
-  jfrog:
+  artifactory:
     image: releases-docker.jfrog.io/jfrog/artifactory-oss:latest
     networks:
       infrastructure:
-        aliases:
-          - jfrog-docker
-    container_name: jfrog
-    ports:
-      - "8081:8081"
-      - "8082:8082"
+    container_name: artifactory
     volumes:
       - ./jfrog/jfrog-home:/var/opt/jfrog/artifactory/:rw,z
 
@@ -87,8 +78,6 @@ services:
     container_name: gateway
     networks:
       infrastructure:
-        aliases:
-          - nginx-docker
 
 networks:
   infrastructure:
