@@ -4,4 +4,7 @@ resources:
 - jenkins/service.yaml
 - jenkins/volume.yaml
 - jenkins/deployment.yaml
+
 - ingress/gateway.yaml
+
+

@@ -5,10 +5,11 @@ metadata:
   namespace: devops-tools
 spec:
   rules:
-  - http:
+  - host: "jenkins-minikube"
+    http:
       paths:
-      - path: /jenkins
-        pathType: Prefix
+      - pathType: Prefix
+        path: "/"
         backend:
           service:
             name: jenkins-service
