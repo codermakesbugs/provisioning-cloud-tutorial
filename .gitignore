@@ -3,6 +3,13 @@ docker/jenkins/jenkins_agent/
 docker/jenkins/ssh/
 
 docker/jfrog/jfrog-home/
+
+docker/database/
+!docker/database/README.md
+
+docker/sonarqube/
+!docker/sonarqube/README.md
+
 docker/nginx/template/
 
 .DS_Store
