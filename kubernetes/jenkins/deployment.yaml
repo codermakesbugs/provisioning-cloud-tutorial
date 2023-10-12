@@ -26,6 +26,11 @@ spec:
         volumeMounts:
           - name: jenkins-data
             mountPath: /var/jenkins_home
+        resources:
+          requests:
+            memory: "512Mi"
+          limits:
+            memory: "1024Mi"
       volumes:
         - name: jenkins-data
           persistentVolumeClaim:
