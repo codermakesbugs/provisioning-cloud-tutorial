@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: database-deployment
+  template:
+    metadata:
+      labels:
+        app: database-deployment
+    spec:
+      securityContext:
+        fsGroup: 1000 
+        runAsUser: 0
+      containers:
+      - name: postgres
+        image: bitnami/postgresql:15.3.0-debian-11-r77
+        ports:
+          - name: "database-port"
+            containerPort: 5432
+            protocol: "TCP"
+        volumeMounts:
+          - name: "database-volume"
+            mountPath: "/bitnami/postgresql"
+            subPath: "postgres-data"
+            readOnly: false
+        env:
+          - name: POSTGRES_USER
+            value: postgres
+          - name: POSTGRES_PASSWORD
+            value: postgres
+      volumes:
+        - name: database-volume
+          persistentVolumeClaim:
+            claimName: database-pv-claim

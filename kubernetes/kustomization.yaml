@@ -11,4 +11,7 @@ resources:
 - artifactory/volume.yaml
 - artifactory/deployment.yaml
 
+- database/service.yaml
+- database/volume.yaml
+- database/deployment.yaml
 

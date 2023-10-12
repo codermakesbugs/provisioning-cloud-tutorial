@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: artifactory-service
+      app: artifactory-deployment
   template:
     metadata:
       labels:
-        app: artifactory-service
+        app: artifactory-deployment
     spec:
       securityContext:
         fsGroup: 1000 
@@ -19,9 +19,9 @@ spec:
       - name: artifactory
         image: releases-docker.jfrog.io/jfrog/artifactory-oss:latest
         ports:
-          - name: artifactory
-            containerPort: 8082
           - name: ui-port
+            containerPort: 8082
+          - name: artifactory
             containerPort: 8081
         volumeMounts:
           - name: artifactory-data
