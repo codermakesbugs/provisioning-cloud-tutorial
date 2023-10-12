@@ -4,9 +4,10 @@
 1. Add this [file](cloud.conf) to `/etc/nginx/conf.d/`
 
 2. Connect machine to Tailscale VPN.
-Add your Tailscale IP device to this file file `/etc/hosts` with dns name `homelab`
+Add your Tailscale IP device to this file file `/etc/hosts` with dns name `jenkins` and `artifactory`
 
-- Example: `homelab    100.100.100.100`
+- Example: `jenkins        100.100.100.100`
+- Example: `artifactory    100.100.100.100`
 
 3. Config TLS
 - Install tool
@@ -22,7 +23,7 @@ apt-get install python3-certbot-nginx
 sudo certbot --nginx -d {{ your DNS }}
 ```
 
-4. Automatically Renew Let’s Encrypt Certificates.
+4. Automatically Renew Let's Encrypt Certificates.
 
 - Open the crontab file.
 ```

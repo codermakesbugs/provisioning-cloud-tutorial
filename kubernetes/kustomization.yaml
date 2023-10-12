@@ -4,4 +4,11 @@ resources:
 - jenkins/service.yaml
 - jenkins/volume.yaml
 - jenkins/deployment.yaml
+
 - ingress/gateway.yaml
+
+- artifactory/service.yaml
+- artifactory/volume.yaml
+- artifactory/deployment.yaml
+
+
