@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: jenkins-service
+      app: jenkins-deployment
   template:
     metadata:
       labels:
-        app: jenkins-service
+        app: jenkins-deployment
     spec:
       securityContext:
         fsGroup: 1000 

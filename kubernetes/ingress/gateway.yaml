@@ -25,3 +25,13 @@ spec:
             name: artifactory-service
             port:
               number: 8082
+  - host: "database-minikube"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: database-service
+            port:
+              number: 5432

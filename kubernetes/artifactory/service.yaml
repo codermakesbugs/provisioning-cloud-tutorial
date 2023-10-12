@@ -5,10 +5,10 @@ metadata:
 spec:
   ports:
     - port: 8081
-      name: artifactory
-      targetPort: 8081
+      name: artifactory-port
+      targetPort: artifactory
     - port: 8082
-      name: ui
-      targetPort: 8082
+      name: ui-port
+      targetPort: ui-port
   selector:
-    app: artifactory-service
+    app: artifactory-deployment
