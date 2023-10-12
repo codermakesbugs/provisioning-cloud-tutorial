@@ -31,6 +31,11 @@ spec:
         envFrom:
           - configMapRef:
               name: "database-configmap"
+        resources:
+          requests:
+            memory: "512Mi"
+          limits:
+            memory: "1024Mi"
       volumes:
         - name: database-volume
           persistentVolumeClaim:
