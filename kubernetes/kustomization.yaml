@@ -11,7 +11,13 @@ resources:
 - artifactory/volume.yaml
 - artifactory/deployment.yaml
 
+- database/configmap.yaml
 - database/service.yaml
 - database/volume.yaml
 - database/deployment.yaml
+
+- sonarqube/service.yaml
+- sonarqube/volume.yaml
+- sonarqube/deployment.yaml
+- sonarqube/configmap.yaml
 

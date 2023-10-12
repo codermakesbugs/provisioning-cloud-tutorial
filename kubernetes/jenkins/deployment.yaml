@@ -14,9 +14,9 @@ spec:
     spec:
       securityContext:
         fsGroup: 1000 
-        runAsUser: 0
       containers:
       - name: jenkins
+        imagePullPolicy: IfNotPresent
         image: jenkins/jenkins:latest-jdk17
         ports:
           - name: http-port
