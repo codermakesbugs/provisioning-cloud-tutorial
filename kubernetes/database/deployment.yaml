@@ -14,9 +14,10 @@ spec:
     spec:
       securityContext:
         fsGroup: 1000 
-        runAsUser: 0
+        runAsUser: 1000
       containers:
       - name: postgres
+        imagePullPolicy: IfNotPresent
         image: bitnami/postgresql:15.3.0-debian-11-r77
         ports:
           - name: "database-port"
@@ -27,11 +28,9 @@ spec:
             mountPath: "/bitnami/postgresql"
             subPath: "postgres-data"
             readOnly: false
-        env:
-          - name: POSTGRES_USER
-            value: postgres
-          - name: POSTGRES_PASSWORD
-            value: postgres
+        envFrom:
+          - configMapRef:
+              name: "database-configmap"
       volumes:
         - name: database-volume
           persistentVolumeClaim:

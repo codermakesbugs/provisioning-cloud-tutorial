@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarqube-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sonarqube-deployment
+  template:
+    metadata:
+      labels:
+        app: sonarqube-deployment
+    spec:
+      initContainers:
+      - name: init
+        image: busybox
+        command:
+        - sysctl
+        - -w
+        - vm.max_map_count=262144
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          privileged: true
+      securityContext:
+        fsGroup: 1000 
+      containers:
+      - name: sonarqube
+        image: sonarqube:9.9.2-community
+        imagePullPolicy: IfNotPresent
+        ports:
+          - name: sonarqube-port
+            containerPort: 9000
+        envFrom:
+          - configMapRef:
+              name: sonarqube-configmap
+        volumeMounts:
+          - name: sonarqube-volume
+            mountPath: "/opt/sonarqube/data/"
+            subPath: data
+          - name: sonarqube-volume
+            mountPath: "/opt/sonarqube/extensions/"
+            subPath: extensions
+        resources:
+          requests:
+            memory: "1024Mi"
+          limits:
+            memory: "2048Mi"
+      volumes:
+      - name: sonarqube-volume
+        persistentVolumeClaim:
+          claimName: sonarqube-pv-claim

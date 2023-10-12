@@ -13,7 +13,7 @@ spec:
   capacity:
     storage: 15Gi
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   local:
     path: /data/artifactory
   nodeAffinity:
@@ -33,7 +33,7 @@ metadata:
 spec:
   storageClassName: local-storage
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 10Gi

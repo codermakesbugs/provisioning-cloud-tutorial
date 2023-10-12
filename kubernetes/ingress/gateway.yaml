@@ -35,3 +35,13 @@ spec:
             name: database-service
             port:
               number: 5432
+  - host: "sonarqube-minikube"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: sonarqube-service
+            port:
+              number: 9000

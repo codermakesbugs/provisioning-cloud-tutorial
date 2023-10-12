@@ -13,10 +13,10 @@ spec:
         app: artifactory-deployment
     spec:
       securityContext:
-        fsGroup: 1000 
-        runAsUser: 0
+        fsGroup: 1000
       containers:
       - name: artifactory
+        imagePullPolicy: IfNotPresent
         image: releases-docker.jfrog.io/jfrog/artifactory-oss:latest
         ports:
           - name: ui-port
