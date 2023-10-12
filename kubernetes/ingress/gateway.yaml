@@ -15,3 +15,13 @@ spec:
             name: jenkins-service
             port:
               number: 8080
+  - host: "artifactory-minikube"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: artifactory-service
+            port:
+              number: 8082

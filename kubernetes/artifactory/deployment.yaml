@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: artifactory-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: artifactory-service
+  template:
+    metadata:
+      labels:
+        app: artifactory-service
+    spec:
+      securityContext:
+        fsGroup: 1000 
+        runAsUser: 0
+      containers:
+      - name: artifactory
+        image: releases-docker.jfrog.io/jfrog/artifactory-oss:latest
+        ports:
+          - name: artifactory
+            containerPort: 8082
+          - name: ui-port
+            containerPort: 8081
+        volumeMounts:
+          - name: artifactory-data
+            mountPath: /var/artifactory
+      volumes:
+        - name: artifactory-data
+          persistentVolumeClaim:
+            claimName: artifactory-pv-claim
