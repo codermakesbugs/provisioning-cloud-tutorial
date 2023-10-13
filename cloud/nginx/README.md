@@ -1,13 +1,10 @@
 # Nginx
 
 ## Cloud machine
-1. Add this [file](cloud.conf) to `/etc/nginx/conf.d/`
+1. Add this files: [artifactory.conf](artifactory.conf), [jenkins.conf](jenkins.conf), [sonarqube.conf](sonarqube.conf) to `/etc/nginx/conf.d/`
 
 2. Connect machine to Tailscale VPN.
-Add your Tailscale IP device to this file file `/etc/hosts` with dns name `jenkins` and `artifactory`
-
-- Example: `jenkins        100.100.100.100`
-- Example: `artifactory    100.100.100.100`
+Add your Tailscale IP device to this file file `/etc/hosts` follow file [hosts](hosts.txt)
 
 3. Config TLS
 - Install tool
