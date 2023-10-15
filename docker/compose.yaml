@@ -13,6 +13,7 @@ services:
     networks:
       infrastructure:
     container_name: jenkins
+    restart: unless-stopped
     volumes:
       - ./jenkins/jenkins_home:/var/jenkins_home:rw,z
       - ./jenkins/ssh/id_rsa:/var/jenkins_home/.ssh/id_ed25519
@@ -33,6 +34,7 @@ services:
         aliases:
           - agent-docker
     container_name: agent
+    restart: unless-stopped
     volumes:
       - ./jenkins/jenkins_agent:/home/jenkins:rw,z
       - /var/run/docker.sock:/var/run/docker.sock:z
@@ -69,6 +71,7 @@ services:
       - ./sonarqube/sonarqube_extensions:/opt/sonarqube/extensions
       - ./sonarqube/sonarqube_logs:/opt/sonarqube/logs
     container_name: sonarqube
+    restart: unless-stopped
     networks:
       infrastructure:
         aliases:
@@ -109,6 +112,7 @@ services:
     ports:
       - "80:80"
     container_name: gateway
+    restart: unless-stopped
     networks:
       infrastructure:
 
