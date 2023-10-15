@@ -5,6 +5,11 @@ services:
     image: jenkins/jenkins:latest-jdk17
     privileged: true
     user: jenkins
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 1g
     networks:
       infrastructure:
     container_name: jenkins
@@ -13,12 +18,16 @@ services:
       - ./jenkins/ssh/id_rsa:/var/jenkins_home/.ssh/id_ed25519
 
   agent:
-    image: agent
+    image: lupinkis/agent-node
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 2g
     privileged: true
     tty: true
     cap_add:
       - NET_ADMIN
-    platform: linux/amd64
     networks:
       infrastructure:
         aliases:
@@ -29,18 +38,28 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:z
       - ./jenkins/ssh/id_rsa.pub:/home/jenkins/.ssh/authorized_keys
 
-  artifactory:
-    image: releases-docker.jfrog.io/jfrog/artifactory-oss:latest
-    networks:
-      infrastructure:
-    container_name: artifactory
-    volumes:
-      - ./jfrog/jfrog-home:/var/opt/jfrog/artifactory/:rw,z
+  # artifactory:
+  #   image: releases-docker.jfrog.io/jfrog/artifactory-oss:latest
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: "0.5"
+  #         memory: 0.5g
+  #   networks:
+  #     infrastructure:
+  #   container_name: artifactory
+  #   volumes:
+  #     - artifactory-data:/var/opt/jfrog/artifactory/:rw,z
 
   sonarqube:
     image: sonarqube:community
     depends_on:
       - database
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 1g
     environment:
       SONAR_JDBC_URL: jdbc:postgresql://database-docker:5432/postgres
       SONAR_JDBC_USERNAME: postgres
@@ -57,6 +76,11 @@ services:
 
   database:
     image: postgres
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 1g
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -71,6 +95,11 @@ services:
 
   gateway:
     image: nginx
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 0.5g
     depends_on:
       - database
       - jenkins
@@ -82,6 +111,9 @@ services:
     container_name: gateway
     networks:
       infrastructure:
+
+volumes:
+  artifactory-data:
 
 networks:
   infrastructure:
